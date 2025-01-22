@@ -9,15 +9,24 @@ connectDB();
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, password } = body;
-    // validation
-    if (!name || !email || !password) {
+    const rawBody = await request.text();
+    if (!rawBody) {
+      return NextResponse.json(
+        { error: "Request body is required" },
+        { status: 400 }
+      );
+    }
+
+    const body = JSON.parse(rawBody);
+    const { username, email, password } = body;
+
+    if (!username || !email || !password) {
       return NextResponse.json(
         { error: "Please fill all the fields" },
         { status: 400 }
       );
     }
+
     const user = await User.findOne({ email });
     if (user) {
       return NextResponse.json(
@@ -28,11 +37,16 @@ export async function POST(request: NextRequest) {
     const salt = bcryptjs.genSaltSync(10);
     const hashedPassword = bcryptjs.hashSync(password, salt);
 
-    const newUser = new User({ name, email, password: hashedPassword });
+    const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
     // send verification email
-    await sendEmail({email, emailType:"VERIFY",userId: newUser._id});
+    const res = await sendEmail({
+      email,
+      emailType: "VERIFY",
+      userId: newUser._id,
+    });
+    console.log(res);
 
     // send response
     return NextResponse.json(
@@ -41,8 +55,10 @@ export async function POST(request: NextRequest) {
         success: true,
       },
       { status: 200 }
-    )
+    );
   } catch (error: any) {
+    console.log(error);
+
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
