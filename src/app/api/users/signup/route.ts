@@ -41,12 +41,11 @@ export async function POST(request: NextRequest) {
     await newUser.save();
 
     // send verification email
-    const res = await sendEmail({
+    await sendEmail({
       email,
       emailType: "VERIFY",
       userId: newUser._id,
     });
-    console.log(res);
 
     // send response
     return NextResponse.json(
