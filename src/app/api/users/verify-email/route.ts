@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import connectDB from "@/config/mongodb.config";
 import User from "@/models/user.model";
-import { request } from "http";
 import { NextRequest, NextResponse } from "next/server";
 
 // conneting to the database
