@@ -42,7 +42,8 @@ export const POST = async (request: NextRequest) => {
     }
 
     // password check
-    const isValidPassword = bcryptjs.compare(password, user.password);
+    const isValidPassword =await bcryptjs.compare(password, user.password);
+    
     if (!isValidPassword) {
       return NextResponse.json(
         {
@@ -67,7 +68,8 @@ export const POST = async (request: NextRequest) => {
     response.cookies.set("token", token, {
       httpOnly: true,
     });
+    return response;
   } catch (error: any) {
-    NextResponse.json({ error: error.message });
+  return  NextResponse.json({ error: error.message });
   }
 };

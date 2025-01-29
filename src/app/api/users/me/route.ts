@@ -19,11 +19,11 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json({ message: "Unauthorized" }, { status: 404 });
     }
 
-    NextResponse.json({
+    return NextResponse.json({
       success: true,
       user,
     });
   } catch (error: any) {
-    NextResponse.json({ message: error.message }, { status: 500 });
+   return NextResponse.json({ message: error.message }, { status: 500 });
   }
 };
