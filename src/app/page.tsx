@@ -6,7 +6,7 @@ export default function Home() {
     <div className="relative h-screen flex items-center justify-center text-center bg-gray-900">
       <div className="absolute inset-0">
         <Image
-          src="/background.jpg"
+          src="https://images.unsplash.com/photo-1737079026600-18f07b9dd0a8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Background"
           fill
           className="object-cover opacity-70"
@@ -17,8 +17,6 @@ export default function Home() {
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       <div className="relative z-10 px-4 sm:px-6 lg:px-8">
-      
-
         {/* Hero Title */}
         <h1 className="text-4xl sm:text-6xl font-bold text-white mb-4">
           Welcome to Nextjs Auth
@@ -29,10 +27,16 @@ export default function Home() {
 
         {/* Buttons */}
         <div className="flex gap-4 justify-center">
-          <Link href="/signup" className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700">
+          <Link
+            href="/signup"
+            className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700"
+          >
             Sign Up
           </Link>
-          <Link href="/login" className="px-6 py-3 text-white border border-white rounded-xl hover:bg-white hover:text-black">
+          <Link
+            href="/login"
+            className="px-6 py-3 text-white border border-white rounded-xl hover:bg-white hover:text-black"
+          >
             Login
           </Link>
         </div>

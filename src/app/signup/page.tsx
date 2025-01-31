@@ -8,7 +8,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function SignupPage() {
-  const router = useRouter()
+  const router = useRouter();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -17,19 +17,22 @@ export default function SignupPage() {
   const [loading, setLoding] = useState(false);
   const isDisabled = !user.username || !user.email || !user.password;
 
-  const handleSubmit =async (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       setLoding(true);
       const response = await axios.post("/api/users/signup", user);
       console.log(response.data);
       if (response.data) {
-        toast.success("User created successfully");
+        toast.success(
+          "Singup Successfull and send email verification link to your email"
+        );
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       }
-      router.push("/login");
-    } catch (error:any) {
+    } catch (error: any) {
       console.log(error);
-      
     } finally {
       setLoding(false);
     }
@@ -89,7 +92,7 @@ export default function SignupPage() {
             className="w-full px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 text-white font-bold"
             disabled={isDisabled || loading}
           >
-            Sign Up
+            {loading ? "Loading..." : "Sign Up"}
           </button>
         </form>
         <p className="mt-4 text-center text-gray-400">
