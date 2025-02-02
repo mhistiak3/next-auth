@@ -6,15 +6,20 @@ import { getDataFromToken } from "@/utils/tokenHandler";
 // conneting to the database
 connectDB();
 
-export const POST = async (request: NextRequest) => {
+export const GET = async (request: NextRequest) => {
   try {
+    
+    
     // get userId
     const userId = getDataFromToken(request);
+    console.log(userId);
     if (!userId) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
     // get user
     const user = await User.findById(userId).select("-password");
+
+    
     if (!user) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 404 });
     }

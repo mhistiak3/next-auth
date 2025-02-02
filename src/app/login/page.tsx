@@ -21,7 +21,7 @@ export default function LoginPage() {
       if (response.data) {
         toast.success("Login Successfull");
         setTimeout(() => {
-          router.push("/me");
+          router.push("/profile");
         }, 2000);
       }
     } catch (error: any) {

@@ -14,6 +14,7 @@ export const GET = async () => {
         httpOnly:true,
         expires:new Date(0)
     })
+    return response
   } catch (error:any) {
     return NextResponse.json({error:error.message},{status:500})
   }
